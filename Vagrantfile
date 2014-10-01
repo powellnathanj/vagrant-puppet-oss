@@ -10,14 +10,14 @@ Vagrant.configure("2") do |config|
   config.vm.define "puppet", primary: true do |puppet|
     config.vm.hostname = "puppet"
     config.vm.provision "puppet" do |puppet|
-      puppet.manifest_file = "master.pp"
+      puppet.manifest_file = "puppet.pp"
     end
   end
 
   config.vm.define "client" do |client|
     config.vm.hostname = "client"
-    config.vm.provision "puppet" do |puppet|
-      puppet.manifest_file = "client.pp"
+    config.vm.provision "puppet" do |client|
+      client.manifest_file = "client.pp"
     end
   end
 
