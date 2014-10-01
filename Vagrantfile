@@ -7,17 +7,17 @@ Vagrant.configure("2") do |config|
 
   config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
 
-  config.vm.define "puppet", primary: true do |puppet|
-    config.vm.hostname = "puppet"
-    config.vm.provision "puppet" do |puppet|
+  config.vm.define "master", primary: true do |master|
+    master.vm.hostname = "puppet"
+    master.vm.provision "puppet" do |puppet|
       puppet.manifest_file = "puppet.pp"
     end
   end
 
   config.vm.define "client" do |client|
-    config.vm.hostname = "client"
-    config.vm.provision "puppet" do |client|
-      client.manifest_file = "client.pp"
+    client.vm.hostname = "client"
+    client.vm.provision "puppet" do |cl|
+      cl.manifest_file = "client.pp"
     end
   end
 
