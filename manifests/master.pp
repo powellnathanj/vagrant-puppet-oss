@@ -13,3 +13,18 @@ package { 'mcollective-client':
 package { 'activemq':
   ensure => 'present',
 }
+
+service {'puppet':
+  ensure => running,
+  enabled => true,
+}
+
+service {'puppet-server':
+  ensure => running,
+  enabled => true,
+}
+
+service {'mcollective':
+  ensure => running,
+  enabled => true,
+}
