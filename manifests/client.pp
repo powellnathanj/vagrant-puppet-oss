@@ -1,0 +1,3 @@
+package { 'mcollective':
+  ensure => present,
+}
