@@ -1,1 +1,1 @@
-This is my Puppet/MCollective development environment
+This is my OSS Puppet/MCollective development environment
