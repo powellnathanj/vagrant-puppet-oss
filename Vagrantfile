@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
   # Puppet client
   config.vm.define "client" do |client|
     # Internal network
-    client.vm.network :private_network, :ip => '10.20.1.2'
+    client.vm.network :private_network, :ip => '10.20.1.3'
 
     client.vm.provision :hosts do |prov|
       prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
