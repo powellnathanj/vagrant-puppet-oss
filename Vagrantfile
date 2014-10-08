@@ -18,15 +18,31 @@ Vagrant.configure("2") do |config|
 
   #config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
 
+  # Puppet master
   config.vm.define "master", primary: true do |master|
-    master.vm.hostname = "puppet"
+    # Internal network
+    master.vm.network :private_network, :ip => '10.20.1.2'
+
+    master.vm.provision :hosts do |prov|
+      prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
+      prov.add_host '10.20.1.3', ['client.nathanpowell.test', 'client']
+    end
+
     master.vm.provision "puppet" do |puppet|
       puppet.manifest_file = "puppet.pp"
     end
   end
-
+ 
+  # Puppet client
   config.vm.define "client" do |client|
-    client.vm.hostname = "client"
+    # Internal network
+    client.vm.network :private_network, :ip => '10.20.1.2'
+
+    client.vm.provision :hosts do |prov|
+      prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
+      prov.add_host '10.20.1.3', ['client.nathanpowell.test', 'client']
+    end
+
     client.vm.provision "puppet" do |cl|
       cl.manifest_file = "client.pp"
     end
