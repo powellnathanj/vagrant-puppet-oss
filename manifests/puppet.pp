@@ -24,7 +24,7 @@ package { 'activemq':
 }
 
 service {'puppet':
-  require => Package['puppet'],
+  require => [Package['puppet'], File['/etc/puppet/puppet.conf']],
   ensure => running,
   enable => true,
 }
@@ -42,7 +42,13 @@ service {'activemq':
   enable => true,
 }
 
-file {'/etc/mcollective/server.cfg':
+file {'/etc/puppet/puppet.conf':
   ensure => present,
-  source => "puppet:///modules/mcollective/server.cfg",
+  source => "puppet:///modules/puppet/puppet.conf",
+  notify => Service['puppet'],
 }
+
+#file {'/etc/mcollective/server.cfg':
+#  ensure => present,
+#  source => "puppet:///modules/mcollective/server.cfg",
+#}

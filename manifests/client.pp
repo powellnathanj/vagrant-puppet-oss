@@ -19,3 +19,9 @@ service { 'puppet':
   ensure => running,
   enable => true,
 }
+
+file {'/etc/puppet/puppet.conf':
+  ensure => present,
+  source => "puppet:///modules/puppet/client.conf",
+  notify => Service['puppet'],
+}

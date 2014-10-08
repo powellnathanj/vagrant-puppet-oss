@@ -17,19 +17,17 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hershey-rhel6-64"
 
   #config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
+  config.vm.provision :hosts do |prov|
+    prov.autoconfigure = true
+  end
 
   # Puppet master
-  config.vm.define "master", primary: true do |master|
-    # Internal network
-    master.vm.network :private_network, :ip => '10.20.1.2'
+  config.vm.define "puppet", primary: true do |puppet|
+    puppet.vm.hostname = "puppet.nathanpowell.test"
+    # Internal networking
+    puppet.vm.network :private_network, :ip => '10.20.1.2'
 
-    master.vm.provision :hosts do |prov|
-      prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
-      prov.add_host '10.20.1.2', ['master.nathanpowell.test', 'master']
-      prov.add_host '10.20.1.3', ['client.nathanpowell.test', 'client']
-    end
-
-    master.vm.provision "puppet" do |puppet|
+    puppet.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
       puppet.manifest_file = "puppet.pp"
     end
@@ -37,13 +35,10 @@ Vagrant.configure("2") do |config|
  
   # Puppet client
   config.vm.define "client" do |client|
-    # Internal network
+    client.vm.hostname = "client.nathanpowell.test"
+    client.vm.provision "shell", inline: "hostname client.nathanpowell.test"
+    # Internal networking
     client.vm.network :private_network, :ip => '10.20.1.3'
-
-    client.vm.provision :hosts do |prov|
-      prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
-      prov.add_host '10.20.1.3', ['client.nathanpowell.test', 'client']
-    end
 
     client.vm.provision "puppet" do |cl|
       cl.module_path = "modules"
