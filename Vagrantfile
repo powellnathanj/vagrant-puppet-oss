@@ -24,6 +24,7 @@ Vagrant.configure("2") do |config|
   # Puppet master
   config.vm.define "puppet", primary: true do |puppet|
     puppet.vm.hostname = "puppet.nathanpowell.test"
+
     # Internal networking
     puppet.vm.network :private_network, :ip => '10.20.1.2'
 
@@ -36,7 +37,7 @@ Vagrant.configure("2") do |config|
   # Puppet client
   config.vm.define "client" do |client|
     client.vm.hostname = "client.nathanpowell.test"
-    client.vm.provision "shell", inline: "hostname client.nathanpowell.test"
+
     # Internal networking
     client.vm.network :private_network, :ip => '10.20.1.3'
 
