@@ -25,10 +25,12 @@ Vagrant.configure("2") do |config|
 
     master.vm.provision :hosts do |prov|
       prov.add_host '10.20.1.2', ['puppet.nathanpowell.test', 'puppet']
+      prov.add_host '10.20.1.2', ['master.nathanpowell.test', 'master']
       prov.add_host '10.20.1.3', ['client.nathanpowell.test', 'client']
     end
 
     master.vm.provision "puppet" do |puppet|
+      puppet.module_path = "modules"
       puppet.manifest_file = "puppet.pp"
     end
   end
@@ -44,6 +46,7 @@ Vagrant.configure("2") do |config|
     end
 
     client.vm.provision "puppet" do |cl|
+      cl.module_path = "modules"
       cl.manifest_file = "client.pp"
     end
   end

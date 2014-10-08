@@ -37,6 +37,12 @@ service {'puppetmaster':
 
 service {'activemq':
   require => Package['activemq'],
+  hasstatus => false,
   ensure => running,
   enable => true,
+}
+
+file {'/etc/mcollective/server.cfg':
+  ensure => present,
+  source => "puppet:///modules/mcollective/server.cfg",
 }
