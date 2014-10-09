@@ -48,6 +48,21 @@ file {'/etc/puppet/puppet.conf':
   notify => [Service['puppet'], Service['puppetmaster']],
 }
 
+file { '/etc/puppet/manifests/site.pp':
+  ensure => present,
+  source => "puppet:///modules/puppet/site.pp",
+}
+
+file { ['/etc/puppet/modules/testmodule', 
+  '/etc/puppet/modules/testmodule/manifests']:
+  ensure => directory,
+}
+
+file { '/etc/puppet/modules/testmodule/manifests/init.pp':
+  ensure => present,
+  source => "puppet:///modules/puppet/testmodule-init.pp",
+}
+
 #file {'/etc/mcollective/server.cfg':
 #  ensure => present,
 #  source => "puppet:///modules/mcollective/server.cfg",
