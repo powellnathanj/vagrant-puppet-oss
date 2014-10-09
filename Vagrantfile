@@ -17,9 +17,6 @@ Vagrant.configure("2") do |config|
   config.vm.box = "hershey-rhel6-64"
 
   #config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
-  config.vm.provision :hosts do |prov|
-    prov.autoconfigure = true
-  end
 
   # Puppet master
   config.vm.define "puppet", primary: true do |puppet|
@@ -27,6 +24,10 @@ Vagrant.configure("2") do |config|
 
     # Internal networking
     puppet.vm.network :private_network, :ip => '10.20.1.2'
+    puppet.vm.provision :hosts do |provisioner|
+      provisioner.autoconfigure = true
+      provisioner.add_host '10.20.1.3', ['client.nathanpowell.test', "client"]
+    end    
 
     puppet.vm.provision "puppet" do |puppet|
       puppet.module_path = "modules"
@@ -40,6 +41,7 @@ Vagrant.configure("2") do |config|
 
     # Internal networking
     client.vm.network :private_network, :ip => '10.20.1.3'
+    client.vm.provision :hosts
 
     client.vm.provision "puppet" do |cl|
       cl.module_path = "modules"
