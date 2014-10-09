@@ -45,7 +45,7 @@ service {'activemq':
 file {'/etc/puppet/puppet.conf':
   ensure => present,
   source => "puppet:///modules/puppet/puppet.conf",
-  notify => Service['puppet'],
+  notify => [Service['puppet'], Service['puppetmaster']],
 }
 
 #file {'/etc/mcollective/server.cfg':
