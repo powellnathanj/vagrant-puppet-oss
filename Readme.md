@@ -24,17 +24,17 @@ Mcollective is on there as well and should be configured to work.  Have a look a
 
 `vagrant ssh puppet`
 
-```[vagrant@puppet ~]$ sudo puppet agent -t
-Info: Retrieving pluginfacts
-Info: Retrieving plugin
-Info: Caching catalog for puppet.nathanpowell.test
-Info: Applying configuration version '1412964713'
+```[vagrant@puppet ~]$ sudo puppet agent -t  
+Info: Retrieving pluginfacts  
+Info: Retrieving plugin  
+Info: Caching catalog for puppet.nathanpowell.test  
+Info: Applying configuration version '1412964713'  
 Notice: Finished catalog run in 0.02 seconds```
-
-```[vagrant@puppet ~]$ sudo mco find
-puppet.nathanpowell.test
+  
+```[vagrant@puppet ~]$ sudo mco find  
+puppet.nathanpowell.test  
 client.nathanpowell.test```
-
+  
 ## Prerequisites
 
 Virtualbox (might work with other providers)
