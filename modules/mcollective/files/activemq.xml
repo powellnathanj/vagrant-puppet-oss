@@ -34,12 +34,6 @@
           http://activemq.apache.org/producer-flow-control.html
         -->
 
-          <sslContext>
-            <sslContext
-               keyStore="keystore.jks" keyStorePassword="password"
-               trustStore="truststore.jks" trustStorePassword="password"
-            />
-          </sslContext>
         <destinationPolicy>
 
           <policyMap>

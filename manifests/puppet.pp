@@ -83,17 +83,20 @@ file { '/etc/activemq/activemq.xml':
   ensure => present,
   source => "puppet:///modules/mcollective/activemq.xml",
   notify => Service['activemq'],
+  require => Package['activemq'],
 }
 
 file { '/etc/mcollective/server.cfg':
   ensure => present,
   source => "puppet:///modules/mcollective/server.cfg",
-  notify => Service['activemq'],
+  notify => Service['mcollective'],
+  require => Package['mcollective'],
 }
 
 file { '/etc/mcollective/client.cfg':
   ensure => present,
   source => "puppet:///modules/mcollective/client.cfg",
-  notify => Service['activemq'],
+  notify => Service['mcollective'],
+  require => [Package['mcollective-client'], Package['mcollective']],
 }
 # End files
