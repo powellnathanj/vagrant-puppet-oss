@@ -1,3 +1,4 @@
+# Packages
 package { 'epel-release':
   ensure => 'present',
   allow_virtual => false,
@@ -18,11 +19,18 @@ package { 'mcollective-client':
   allow_virtual => false,
 }
 
-package { 'activemq':
+package { 'mcollective':
   ensure => 'present',
   allow_virtual => false,
 }
 
+package { 'activemq':
+  ensure => 'present',
+  allow_virtual => false,
+}
+# End packages
+
+# Services
 service {'puppet':
   require => [Package['puppet'], File['/etc/puppet/puppet.conf']],
   ensure => running,
@@ -35,13 +43,21 @@ service {'puppetmaster':
   enable => true,
 }
 
+service {'mcollective':
+  require => Package['mcollective'],
+  ensure => running,
+  enable => true,
+}
+
 service {'activemq':
   require => Package['activemq'],
   hasstatus => false,
   ensure => running,
   enable => true,
 }
+# End services
 
+# Files
 file {'/etc/puppet/puppet.conf':
   ensure => present,
   source => "puppet:///modules/puppet/puppet.conf",
@@ -63,7 +79,21 @@ file { '/etc/puppet/modules/testmodule/manifests/init.pp':
   source => "puppet:///modules/puppet/testmodule-init.pp",
 }
 
-#file {'/etc/mcollective/server.cfg':
-#  ensure => present,
-#  source => "puppet:///modules/mcollective/server.cfg",
-#}
+file { '/etc/activemq/activemq.xml':
+  ensure => present,
+  source => "puppet:///modules/mcollective/activemq.xml",
+  notify => Service['activemq'],
+}
+
+file { '/etc/mcollective/server.cfg':
+  ensure => present,
+  source => "puppet:///modules/mcollective/server.cfg",
+  notify => Service['activemq'],
+}
+
+file { '/etc/mcollective/client.cfg':
+  ensure => present,
+  source => "puppet:///modules/mcollective/client.cfg",
+  notify => Service['activemq'],
+}
+# End files
