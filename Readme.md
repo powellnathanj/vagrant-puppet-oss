@@ -1,39 +1,41 @@
-# This is my OSS Puppet/MCollective development environment.
+## This is my OSS Puppet/MCollective development environment.
 
 You should be able to use it as well. You'll have to change the base box setting in the Vagrantfile, but otherwise it should just work.
 
-# Set up
+## Set up
 
 This is a two node configuration. Node 1 is the puppetmaster, hostname puppet, and the second is a regular puppet server, hostname client.
 
 Both nodes are defined in site.pp and are importing a test module that just writes out a file, so you know it's working.
 
-# MCollective
+## MCollective
 
 Mcollective is on there as well and should be configured to work.  Have a look at the server.cgf and client.cfg for details.
 
-# Usage
+## Usage
 
-## Quick start
+You can use this for clean room Puppet and Mcollective development.
 
-`git clone https://github.com/slaney/vagrant-puppet-oss.git`
+### Quick start
 
-`cd vagrant-puppet-oss`
+`# git clone https://github.com/slaney/vagrant-puppet-oss.git`
 
-`vagrant up`
+`# cd vagrant-puppet-oss`
 
-`vagrant ssh puppet`
+`# vagrant up`
 
-```[vagrant@puppet ~]$ sudo puppet agent -t  
-Info: Retrieving pluginfacts  
-Info: Retrieving plugin  
-Info: Caching catalog for puppet.nathanpowell.test  
-Info: Applying configuration version '1412964713'  
-Notice: Finished catalog run in 0.02 seconds```
+`# vagrant ssh puppet`
+
+`[vagrant@puppet ~]$ sudo puppet agent -t`<br/>
+`Info: Retrieving pluginfacts`<br/>
+`Info: Retrieving plugin`<br/>
+`Info: Caching catalog for puppet.nathanpowell.test`<br/>
+`Info: Applying configuration version '1412964713'`<br/>
+`Notice: Finished catalog run in 0.02 seconds`<br/>
   
-```[vagrant@puppet ~]$ sudo mco find  
-puppet.nathanpowell.test  
-client.nathanpowell.test```
+`[vagrant@puppet ~]$ sudo mco find`<br/>
+`puppet.nathanpowell.test`<br/>
+`client.nathanpowell.test`<br/>
   
 ## Prerequisites
 
