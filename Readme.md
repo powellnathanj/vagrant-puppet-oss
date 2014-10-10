@@ -38,4 +38,5 @@ client.nathanpowell.test`
 ## Prerequisites
 
 Virtualbox (might work with other providers)
+
 vagrant-hosts (https://github.com/adrienthebo/vagrant-hosts)
