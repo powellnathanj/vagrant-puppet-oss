@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "yum install -y puppet"
 
   # base box
-  config.vm.box = "hershey-rhel6-64"
+  config.vm.box = "hershey-rhel6-65"
 
   #config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
 

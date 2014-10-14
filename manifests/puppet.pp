@@ -1,4 +1,10 @@
 # Packages
+
+package { 'git':
+  ensure => 'present',
+  allow_virtual => false,
+}
+
 package { 'epel-release':
   ensure => 'present',
   allow_virtual => false,
