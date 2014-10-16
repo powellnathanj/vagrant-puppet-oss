@@ -23,10 +23,10 @@ Vagrant.configure("2") do |config|
     puppet.vm.hostname = "puppet.nathanpowell.test"
 
     # Internal networking
-    puppet.vm.network :private_network, :ip => '10.20.1.2'
+    puppet.vm.network :private_network, :ip => '10.30.1.2'
     puppet.vm.provision :hosts do |provisioner|
       provisioner.autoconfigure = true
-      provisioner.add_host '10.20.1.3', ['client.nathanpowell.test', "client"]
+      provisioner.add_host '10.30.1.3', ['client.nathanpowell.test', "client"]
     end    
 
     puppet.vm.provision "puppet" do |puppet|
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
     client.vm.hostname = "client.nathanpowell.test"
 
     # Internal networking
-    client.vm.network :private_network, :ip => '10.20.1.3'
+    client.vm.network :private_network, :ip => '10.30.1.3'
     client.vm.provision :hosts
 
     client.vm.provision "puppet" do |cl|
