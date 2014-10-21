@@ -59,10 +59,6 @@
             of each authorizationEntry element.
           -->
 
-        <persistenceAdapter>
-          <kahaDB directory="${activemq.base}/data/kahadb"/>
-        </persistenceAdapter>
-
 
           <simpleAuthenticationPlugin>
             <users>
@@ -101,6 +97,12 @@
             </map>
           </authorizationPlugin>
         </plugins>
+
+
+        <persistenceAdapter>
+          <kahaDB directory="${activemq.base}/data/kahadb"/>
+        </persistenceAdapter>
+
 
         <!--
           The systemUsage controls the maximum amount of space the broker will
@@ -143,3 +145,4 @@
     -->
     <import resource="jetty.xml"/>
 </beans>
+
