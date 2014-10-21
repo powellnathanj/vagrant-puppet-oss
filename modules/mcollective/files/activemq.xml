@@ -23,7 +23,9 @@
       previous versions back to 5.4.
       https://issues.apache.org/jira/browse/AMQ-3570
     -->
-    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" useJmx="true" schedulePeriodForDestinationPurge="60000">
+    <!--<broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" useJmx="true" schedulePeriodForDestinationPurge="60000"> -->
+    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="${activemq.base}/data">
+
         <!--
           MCollective generally expects producer flow control to be turned off.
           It will also generate a limitless number of single-use reply queues,
@@ -56,6 +58,12 @@
             are referenced below, in the write/read/admin attributes
             of each authorizationEntry element.
           -->
+
+        <persistenceAdapter>
+          <kahaDB directory="${activemq.base}/data/kahadb"/>
+        </persistenceAdapter>
+
+
           <simpleAuthenticationPlugin>
             <users>
               <authenticationUser username="mcollective" password="mcollective" groups="mcollective,everyone"/>
