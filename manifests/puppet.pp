@@ -106,7 +106,7 @@ file { '/etc/mcollective/client.cfg':
 }
 
 file { ['/etc/puppet/modules/mcollective', 
-  '/etc/puppet/modules/mcollective/manifests'
+  '/etc/puppet/modules/mcollective/manifests',
   '/etc/puppet/modules/mcollective/files']:
   ensure => directory,
   before => Exec['checkout yum agent'],
@@ -119,6 +119,7 @@ file { '/etc/puppet/modules/mcollective/manifests/init.pp':
 # End files
 
 exec {"checkout yum agent":
-  command => "git clone https://github.com/slaney/mcollective-yum-agent.git",
+  command => "/usr/bin/git clone https://github.com/slaney/mcollective-yum-agent.git",
   cwd => '/etc/puppet/modules/mcollective/files',
+  require => Package['git'],
 }
