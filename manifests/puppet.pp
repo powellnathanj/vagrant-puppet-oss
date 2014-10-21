@@ -1,5 +1,4 @@
 # Packages
-
 package { 'git':
   ensure => 'present',
   allow_virtual => false,
@@ -105,4 +104,21 @@ file { '/etc/mcollective/client.cfg':
   notify => Service['mcollective'],
   require => [Package['mcollective-client'], Package['mcollective']],
 }
+
+file { ['/etc/puppet/modules/mcollective', 
+  '/etc/puppet/modules/mcollective/manifests'
+  '/etc/puppet/modules/mcollective/files']:
+  ensure => directory,
+  before => Exec['checkout yum agent'],
+}
+
+file { '/etc/puppet/modules/mcollective/manifests/init.pp':
+  ensure => present,
+  source => "puppet:///modules/puppet/mcollective-init.pp",
+}
 # End files
+
+exec {"checkout yum agent":
+  command => "git clone https://github.com/slaney/mcollective-yum-agent.git",
+  cwd => '/etc/puppet/modules/mcollective/files',
+}
