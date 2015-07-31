@@ -60,6 +60,11 @@ service {'activemq':
   ensure => running,
   enable => true,
 }
+
+service {'firewalld':
+  ensure => stopped,
+  enable => false,
+}
 # End services
 
 # Files

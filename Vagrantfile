@@ -10,13 +10,13 @@ Vagrant.configure("2") do |config|
   ## End proxy set up
 
   config.vm.provision "shell", inline: "source ~/.bashrc"
-  config.vm.provision "shell", inline: "yum install -y http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm"
+  config.vm.provision "shell", inline: "yum install -y http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm"
   config.vm.provision "shell", inline: "yum install -y puppet"
 
   # base box
-  config.vm.box = ""
+  config.vm.box = "centos7-npowell"
 
-  #config.ssh.private_key_path = "~/.ssh/nathanpowell.org-vagrant_rsa"
+  config.ssh.private_key_path = "~/.ssh/id_rsa-vagrant"
 
   # Puppet master
   config.vm.define "puppet", primary: true do |puppet|
