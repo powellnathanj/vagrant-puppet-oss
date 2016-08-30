@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   # base box
   config.vm.box = "centos/7"
 
-  config.ssh.private_key_path = "~/.ssh/id_rsa-vagrant"
+  config.ssh.private_key_path = "~/.ssh/vagrant"
 
   # Puppet master
   config.vm.define "puppet", primary: true do |puppet|
