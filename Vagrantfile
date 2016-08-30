@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "yum install -y puppet"
 
   # base box
-  config.vm.box = "centos7-npowell"
+  config.vm.box = "centos/7"
 
   config.ssh.private_key_path = "~/.ssh/id_rsa-vagrant"
 
