@@ -1,3 +1,7 @@
+# DEPRECATED DO NOT USE 
+
+I am working on a new one for Puppet 4, using environments etc, this is just here for historical purposes
+
 ## This is my OSS Puppet/MCollective development environment.
 
 You should be able to use it as well. You'll have to change the base box setting in the Vagrantfile, but otherwise it should just work.
